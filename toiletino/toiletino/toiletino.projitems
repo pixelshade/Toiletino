@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)toiletino.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapPage.cs" />
   </ItemGroup>
 </Project>
