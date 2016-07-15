@@ -17,5 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs">
       <Link>Constants.cs</Link>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Storage.cs" />
   </ItemGroup>
 </Project>

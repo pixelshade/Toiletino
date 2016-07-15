@@ -11,16 +11,30 @@ namespace toiletino
 {
 	public class RestService
 	{
-		private HttpClient client;
+		private static RestService instance;
 
-		public RestService()
+		private static HttpClient client;
+
+		public static RestService Instance
+		{
+			get
+			{
+				if (instance == null)
+				{
+					instance = new RestService();
+				}
+				return instance;
+			}
+		}
+
+		private RestService()
 		{
 			client = new HttpClient();
 			client.MaxResponseContentBufferSize = 256000;
 		}
 
 
-		public async Task<List<Toilet>> RefreshToiletList(Position position)
+		public async Task<List<Toilet>> GetClosestToiletList(Position position)
 		{
 			var uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
 

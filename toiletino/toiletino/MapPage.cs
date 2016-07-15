@@ -1,12 +1,15 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace toiletino
 {
 	class MapPage : ContentPage
 	{
 		private Map map;
-
+		private Button NavigateButton;
 		public MapPage()
 		{
 			map = new Map(
@@ -30,15 +33,26 @@ namespace toiletino
 			};
 			map.Pins.Add(pin);
 
+			NavigateButton = new Button();
+			NavigateButton.Text = "Find toilet";
+			NavigateButton.Clicked += MoveToNextToilet;
+
 			stack.Children.Add(map);
+			stack.Children.Add(NavigateButton);
 			Content = stack;
 		}
 
-		public void MoveTo(Position position)
+		public async void MoveToNextToilet(object sender, EventArgs e)
+		{
+			List<Toilet> toilets = await RestService.Instance.GetClosestToiletList(new Position());
+			MoveMapTo(toilets.First().location);
+		}
+
+		public void MoveMapTo(Position position)
 		{
 			map.MoveToRegion(
 				 MapSpan.FromCenterAndRadius(
-				new Position(37, -122), Distance.FromMiles(1)
+				position, Distance.FromMiles(1)
 				));
 		}
 	}
