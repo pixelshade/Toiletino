@@ -11,5 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)toiletino.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Toilet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs">
+      <Link>Constants.cs</Link>
+    </Compile>
   </ItemGroup>
 </Project>
