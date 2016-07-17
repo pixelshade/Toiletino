@@ -2,6 +2,6 @@
 {
 	public static class Constants
 	{
-		public static string RestUrl = "http://www.nocturnal.cf/";
+		public static string RestUrl = "https://www.nuget.org/packages/Xam.Plugin.Geolocator";
 	}
 }

@@ -41,9 +41,16 @@ namespace toiletino
 			var response = await client.GetAsync(uri);
 			if (response.IsSuccessStatusCode)
 			{
-				var content = await response.Content.ReadAsStringAsync();
-				var toilets = JsonConvert.DeserializeObject<List<Toilet>>(content);
-				return toilets;
+				try
+				{
+					var content = await response.Content.ReadAsStringAsync();
+					var toilets = JsonConvert.DeserializeObject<List<Toilet>>(content);
+					return toilets;
+				}
+				catch(Exception e)
+				{
+					return null;;
+				}
 			}
 			return null;
 

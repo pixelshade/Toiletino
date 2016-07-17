@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using System.Collections.Generic;
 using System.Linq;
+using Plugin.Geolocator;
 
 namespace toiletino
 {
@@ -10,6 +11,7 @@ namespace toiletino
 	{
 		private Map map;
 		private Button NavigateButton;
+		//private Position lastPosition;
 		public MapPage()
 		{
 			map = new Map(
@@ -44,16 +46,34 @@ namespace toiletino
 
 		public async void MoveToNextToilet(object sender, EventArgs e)
 		{
-			List<Toilet> toilets = await RestService.Instance.GetClosestToiletList(new Position());
-			MoveMapTo(toilets.First().location);
+			var pos = await GetPosition();
+			List<Toilet> toilets = await RestService.Instance.GetClosestToiletList(pos);
+			//MoveMapTo(toilets.First().location);
+			MoveMapTo(pos);
 		}
 
 		public void MoveMapTo(Position position)
 		{
+			
 			map.MoveToRegion(
 				 MapSpan.FromCenterAndRadius(
 				position, Distance.FromMiles(1)
 				));
+		}
+
+
+		public async System.Threading.Tasks.Task<Position> GetPosition()
+		{
+
+			var locator = CrossGeolocator.Current;
+			locator.DesiredAccuracy = 50;
+
+			var position = await locator.GetPositionAsync(10000);
+
+			Console.WriteLine("Position Status: {0}", position.Timestamp);
+			Console.WriteLine("Position Latitude: {0}", position.Latitude);
+			Console.WriteLine("Position Longitude: {0}", position.Longitude);
+			return new Position(position.Latitude,position.Longitude);
 		}
 	}
 }
