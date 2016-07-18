@@ -8,7 +8,6 @@ const graph = require('fbgraph');
 const Twit = require('twit');
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
-const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
 const paypal = require('paypal-rest-sdk');
 const ig = require('instagram-node').instagram();
 const Y = require('yui/yql');
@@ -285,33 +284,6 @@ exports.postTwilio = (req, res, next) => {
     if (err) { return next(err.message); }
     req.flash('success', { msg: `Text sent to ${responseData.to}.` });
     res.redirect('/api/twilio');
-  });
-};
-
-/**
- * GET /api/clockwork
- * Clockwork SMS API example.
- */
-exports.getClockwork = (req, res) => {
-  res.render('api/clockwork', {
-    title: 'Clockwork SMS API'
-  });
-};
-
-/**
- * POST /api/clockwork
- * Send a text message using Clockwork SMS
- */
-exports.postClockwork = (req, res, next) => {
-  const message = {
-    To: req.body.telephone,
-    From: 'Hackathon',
-    Content: 'Hello from the Hackathon Starter'
-  };
-  clockwork.sendSms(message, (err, responseData) => {
-    if (err) { return next(err.errDesc); }
-    req.flash('success', { msg: `Text sent to ${responseData.responses[0].to}` });
-    res.redirect('/api/clockwork');
   });
 };
 
