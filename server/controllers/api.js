@@ -6,7 +6,6 @@ const request = require('request');
 const cheerio = require('cheerio');
 const graph = require('fbgraph');
 const tumblr = require('tumblr.js');
-const Github = require('github-api');
 const Twit = require('twit');
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
@@ -132,23 +131,6 @@ exports.getScraping = (req, res) => {
     res.render('api/scraping', {
       title: 'Web Scraping',
       links
-    });
-  });
-};
-
-/**
- * GET /api/github
- * GitHub API Example.
- */
-exports.getGithub = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'github');
-  const github = new Github({ token: token.accessToken });
-  const repo = github.getRepo('sahat', 'satellizer');
-  repo.getDetails((err, repo) => {
-    if (err) { return next(err); }
-    res.render('api/github', {
-      title: 'GitHub API',
-      repo
     });
   });
 };
