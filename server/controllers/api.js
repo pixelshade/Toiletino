@@ -5,7 +5,6 @@ const validator = require('validator');
 const request = require('request');
 const cheerio = require('cheerio');
 const graph = require('fbgraph');
-const LastFmNode = require('lastfm').LastFmNode;
 const tumblr = require('tumblr.js');
 const Github = require('github-api');
 const Twit = require('twit');
@@ -181,63 +180,6 @@ exports.getNewYorkTimes = (req, res, next) => {
     res.render('api/nyt', {
       title: 'New York Times API',
       books
-    });
-  });
-};
-
-/**
- * GET /api/lastfm
- * Last.fm API example.
- */
-exports.getLastfm = (req, res, next) => {
-  const lastfm = new LastFmNode({
-    api_key: process.env.LASTFM_KEY,
-    secret: process.env.LASTFM_SECRET
-  });
-  async.parallel({
-    artistInfo: (done) => {
-      lastfm.request('artist.getInfo', {
-        artist: 'Roniit',
-        handlers: {
-          success: (data) => done(null, data),
-          error: (err) => done(err)
-        }
-      });
-    },
-    artistTopTracks: (done) => {
-      lastfm.request('artist.getTopTracks', {
-        artist: 'Roniit',
-        handlers: {
-          success: (data) => done(null, data.toptracks.track.slice(0, 10)),
-          error: (err) => done(err)
-        }
-      });
-    },
-    artistTopAlbums: (done) => {
-      lastfm.request('artist.getTopAlbums', {
-        artist: 'Roniit',
-        handlers: {
-          success: (data) => done(null, data.topalbums.album.slice(0, 3)),
-          error: (err) => done(err)
-        }
-      });
-    }
-  },
-  (err, results) => {
-    if (err) { return next(err); }
-    const artist = {
-      name: results.artistInfo.artist.name,
-      image: results.artistInfo.artist.image.slice(-1)[0]['#text'],
-      tags: results.artistInfo.artist.tags.tag,
-      bio: results.artistInfo.artist.bio.summary,
-      stats: results.artistInfo.artist.stats,
-      similar: results.artistInfo.artist.similar.artist,
-      topAlbums: results.artistTopAlbums,
-      topTracks: results.artistTopTracks
-    };
-    res.render('api/lastfm', {
-      title: 'Last.fm API',
-      artist
     });
   });
 };
