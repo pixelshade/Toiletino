@@ -5,7 +5,6 @@ const validator = require('validator');
 const request = require('request');
 const cheerio = require('cheerio');
 const graph = require('fbgraph');
-const tumblr = require('tumblr.js');
 const Twit = require('twit');
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
@@ -61,28 +60,6 @@ exports.getFoursquare = (req, res, next) => {
       trendingVenues: results.trendingVenues,
       venueDetail: results.venueDetail,
       userCheckins: results.userCheckins
-    });
-  });
-};
-
-/**
- * GET /api/tumblr
- * Tumblr API example.
- */
-exports.getTumblr = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'tumblr');
-  const client = tumblr.createClient({
-    consumer_key: process.env.TUMBLR_KEY,
-    consumer_secret: process.env.TUMBLR_SECRET,
-    token: token.accessToken,
-    token_secret: token.tokenSecret
-  });
-  client.posts('mmosdotcom.tumblr.com', { type: 'photo' }, (err, data) => {
-    if (err) { return next(err); }
-    res.render('api/tumblr', {
-      title: 'Tumblr API',
-      blog: data.blog,
-      photoset: data.posts[0].photos
     });
   });
 };
