@@ -9,7 +9,6 @@ const tumblr = require('tumblr.js');
 const Twit = require('twit');
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
-const Linkedin = require('node-linkedin')(process.env.LINKEDIN_ID, process.env.LINKEDIN_SECRET, process.env.LINKEDIN_CALLBACK_URL);
 const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
 const paypal = require('paypal-rest-sdk');
 const ig = require('instagram-node').instagram();
@@ -357,22 +356,6 @@ exports.postClockwork = (req, res, next) => {
     if (err) { return next(err.errDesc); }
     req.flash('success', { msg: `Text sent to ${responseData.responses[0].to}` });
     res.redirect('/api/clockwork');
-  });
-};
-
-/**
- * GET /api/linkedin
- * LinkedIn API example.
- */
-exports.getLinkedin = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'linkedin');
-  const linkedin = Linkedin.init(token.accessToken);
-  linkedin.people.me((err, $in) => {
-    if (err) { return next(err); }
-    res.render('api/linkedin', {
-      title: 'LinkedIn API',
-      profile: $in
-    });
   });
 };
 
