@@ -111,16 +111,6 @@ exports.getScraping = (req, res) => {
 };
 
 /**
- * GET /api/aviary
- * Aviary image processing example.
- */
-exports.getAviary = (req, res) => {
-  res.render('api/aviary', {
-    title: 'Aviary API'
-  });
-};
-
-/**
  * GET /api/twitter
  * Twitter API example.
  */
