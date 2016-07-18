@@ -42,8 +42,7 @@
     "stripe": "^4.7.0",
     "twilio": "^3.3.0-edge",
     "twit": "^2.2.4",
-    "validator": "^5.4.0",
-    "yui": "^3.18.1"
+    "validator": "^5.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -52,6 +51,5 @@
   },
   "engines": {
     "node": "6.1.0"
-  },
-  "license": "MIT"
+  }
 }
