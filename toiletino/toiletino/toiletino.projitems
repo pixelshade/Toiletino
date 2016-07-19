@@ -12,11 +12,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)toiletino.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Toilet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rating.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs">
       <Link>Constants.cs</Link>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Storage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Toilet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Achievement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ToiletInfoImage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
   </ItemGroup>
 </Project>

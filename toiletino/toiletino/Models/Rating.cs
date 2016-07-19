@@ -3,7 +3,8 @@ namespace toiletino
 {
 	public class Rating
 	{
-		public Guid Uid;
+		public Guid UserGuid;
+		public Guid Guid;
 		public String Comment;
 		public int Score;
 		public int Good;
