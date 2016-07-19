@@ -9,7 +9,6 @@ const Twit = require('twit');
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 const paypal = require('paypal-rest-sdk');
-const ig = require('instagram-node').instagram();
 const foursquare = require('node-foursquare')({
   secrets: {
     clientId: process.env.FOURSQUARE_ID,
@@ -225,47 +224,6 @@ exports.postTwilio = (req, res, next) => {
     if (err) { return next(err.message); }
     req.flash('success', { msg: `Text sent to ${responseData.to}.` });
     res.redirect('/api/twilio');
-  });
-};
-
-/**
- * GET /api/instagram
- * Instagram API example.
- */
-exports.getInstagram = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'instagram');
-  ig.use({ client_id: process.env.INSTAGRAM_ID, client_secret: process.env.INSTAGRAM_SECRET });
-  ig.use({ access_token: token.accessToken });
-  async.parallel({
-    searchByUsername: (done) => {
-      ig.user_search('richellemead', (err, users) => {
-        done(err, users);
-      });
-    },
-    searchByUserId: (done) => {
-      ig.user('175948269', (err, user) => {
-        done(err, user);
-      });
-    },
-    popularImages: (done) => {
-      ig.media_popular((err, medias) => {
-        done(err, medias);
-      });
-    },
-    myRecentMedia: (done) => {
-      ig.user_self_media_recent((err, medias) => {
-        done(err, medias);
-      });
-    }
-  }, (err, results) => {
-    if (err) { return next(err); }
-    res.render('api/instagram', {
-      title: 'Instagram API',
-      usernames: results.searchByUsername,
-      userById: results.searchByUserId,
-      popularImages: results.popularImages,
-      myRecentMedia: results.myRecentMedia
-    });
   });
 };
 
