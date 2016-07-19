@@ -129,7 +129,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
-app.get('/api/steam', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getSteam);
 app.get('/api/stripe', apiController.getStripe);
 app.post('/api/stripe', apiController.postStripe);
 app.get('/api/scraping', apiController.getScraping);
@@ -172,10 +171,6 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedi
 app.get('/auth/foursquare', passport.authorize('foursquare'));
 app.get('/auth/foursquare/callback', passport.authorize('foursquare', { failureRedirect: '/api' }), (req, res) => {
   res.redirect('/api/foursquare');
-});
-app.get('/auth/steam', passport.authorize('openid', { state: 'SOME STATE' }));
-app.get('/auth/steam/callback', passport.authorize('openid', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect(req.session.returnTo || '/');
 });
 
 /**
