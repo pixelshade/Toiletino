@@ -25,7 +25,7 @@ namespace toiletino
 			//		}
 			//	}
 			//};
-			MainPage = new toiletino.MapPage();
+			MainPage = new NavigationPage(new toiletino.MapPage());
 		}
 
 		protected override void OnStart()

@@ -11,6 +11,7 @@ namespace toiletino
 	{
 		private Map map;
 		private Button NavigateButton;
+		private Button ListToiletsButton;
 		//private Position lastPosition;
 		public MapPage()
 		{
@@ -37,11 +38,27 @@ namespace toiletino
 
 			NavigateButton = new Button();
 			NavigateButton.Text = "Find toilet";
+			NavigateButton.HorizontalOptions = LayoutOptions.FillAndExpand;
+			NavigateButton.BackgroundColor = Color.Silver;
 			NavigateButton.Clicked += MoveToNextToilet;
 
+			ListToiletsButton = new Button();
+			ListToiletsButton.HorizontalOptions = LayoutOptions.FillAndExpand;
+			ListToiletsButton.Text = "Show toilet list";
+			ListToiletsButton.Clicked += ShowToiletsListPage;
+
+			StackLayout buttonsStack = new StackLayout { Orientation = StackOrientation.Horizontal };
+
 			stack.Children.Add(map);
-			stack.Children.Add(NavigateButton);
+			stack.Children.Add(buttonsStack);
+			buttonsStack.Children.Add(NavigateButton);
+			buttonsStack.Children.Add(ListToiletsButton);
 			Content = stack;
+		}
+
+		public async void ShowToiletsListPage(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new ToiletsList(), true);
 		}
 
 		public async void MoveToNextToilet(object sender, EventArgs e)

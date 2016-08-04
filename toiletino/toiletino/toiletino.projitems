@@ -21,8 +21,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Achievement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ToiletInfoImage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ToiletListPage.xaml.cs">
+      <DependentUpon>ToiletListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ToiletsList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ToiletListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
