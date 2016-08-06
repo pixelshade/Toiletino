@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="toiletino.ToiletDetailPage">
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical">
+			<Label Text="{Binding Name}"></Label>
+			<Image HorizontalOptions="FillAndExpand" Source="{Binding MainImage}">
+			</Image>
+			<Label Text="{Binding Info}"></Label>
+			<ListView ItemsSource="{Binding Ratings}">
+			 <ListView.ItemTemplate>
+					<DataTemplate>
+						<TextCell Text="{Binding Commment}"></TextCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

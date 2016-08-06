@@ -38,8 +38,8 @@ namespace toiletino
 			var cell = new DataTemplate(typeof(ImageCell));
 
 			cell.SetBinding(TextCell.TextProperty, "Name");
-			cell.SetBinding(TextCell.DetailProperty, new Binding("Position", stringFormat: "{0}"));
-			cell.SetBinding(ImageCell.ImageSourceProperty, "Image");
+			cell.SetBinding(TextCell.DetailProperty, "Info");
+			cell.SetBinding(ImageCell.ImageSourceProperty, "MainImage");
 
 			ListView listView = new ListView
 			{

@@ -7,13 +7,13 @@ namespace toiletino
 {
 	public class Toilet
 	{
-		public Position Location;
-		public String Name;
-		public String Info;
-		public List<Rating> Ratings;
-		public List<ToiletInfoImage> Images;
-		public User AddedBy;
-		public String MainImage;
+		public Position Location { get; set; }
+		public String Name { get; set;}
+		public String Info{ get; set; }
+		public List<Rating> Ratings { get; set; }
+		public List<ToiletInfoImage> Images { get; set; }
+		public User AddedBy { get; set; }
+		public String MainImage { get; set; }
 
 		public Toilet()
 		{

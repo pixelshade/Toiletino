@@ -58,7 +58,7 @@ namespace toiletino
 
 		public async void ShowToiletsListPage(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new ToiletsList(), true);
+			await Navigation.PushAsync(new ToiletsListPage(), true);
 		}
 
 		public async void MoveToNextToilet(object sender, EventArgs e)
