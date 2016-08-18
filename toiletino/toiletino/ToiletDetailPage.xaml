@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="toiletino.ToiletDetailPage">
 	<ContentPage.Content>
-		<StackLayout Orientation="Vertical">
-			<Label Text="{Binding Name}"></Label>
-			<Image HorizontalOptions="FillAndExpand" Source="{Binding MainImage}">
+	<StackLayout Orientation="Vertical">
+			<Label x:Name="toiletNameLabel" Text="{Binding Name}" HorizontalOptions="CenterAndExpand"></Label>
+			<Label Text="Hitler di nothing wrong" HorizontalOptions="CenterAndExpand"></Label>
+			<Image x:Name="toiletMainImage" HorizontalOptions="FillAndExpand" Source="{Binding MainImage}">
 			</Image>
-			<Label Text="{Binding Info}"></Label>
+			<Label x:Name="toiletInfoLabel" Text="{Binding Info}"></Label>
 			<ListView ItemsSource="{Binding Ratings}">
 			 <ListView.ItemTemplate>
 					<DataTemplate>
